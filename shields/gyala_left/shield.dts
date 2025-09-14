@@ -1,0 +1,21 @@
+/ {
+    compatible = "zmk,keyboard";
+
+    matrix {
+        row-gpios = <&gpio0 0 GPIO_ACTIVE_LOW>, <&gpio0 1 GPIO_ACTIVE_LOW>, <&gpio0 2 GPIO_ACTIVE_LOW>;
+        col-gpios = <&gpio1 3 GPIO_ACTIVE_LOW>, <&gpio1 4 GPIO_ACTIVE_LOW>, <&gpio1 5 GPIO_ACTIVE_LOW>, <&gpio1 6 GPIO_ACTIVE_LOW>;
+    };
+
+    i2c1 {
+        compatible = "nordic,nrf-twi";
+        status = "okay";
+        sda-pin = <26>;
+        scl-pin = <27>;
+    };
+
+    encoder1 {
+        a-pin = <10>;
+        b-pin = <11>;
+        resolution = <4>;
+    };
+};

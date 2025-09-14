@@ -1,0 +1,5 @@
+config SHIELD_GYALA_LEFT
+    bool "gyala_left"
+    depends on BOARD_SEEEDUINO_XIAO_BLE
+    help
+      Enable the gyala_left shield.

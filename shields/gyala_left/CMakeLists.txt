@@ -1,0 +1,1 @@
+zephyr_library_named(gyala_left)
