@@ -20,6 +20,14 @@ jobs:
           sudo apt install -y wget git make gcc g++ unzip libffi-dev cmake ninja-build gperf dfu-util device-tree-compiler python3-pip
           pip3 install west
 
+      - name: Install Zephyr SDK
+        run: |
+          wget https://github.com/zephyrproject-rtos/sdk-ng/releases/download/v0.16.4/zephyr-sdk-0.16.4_linux-x86_64.tar.xz
+          tar -xf zephyr-sdk-0.16.4_linux-x86_64.tar.xz
+          mv zephyr-sdk-0.16.4 $HOME/zephyr-sdk
+          $HOME/zephyr-sdk/setup.sh -t all -h
+          echo "ZEPHYR_SDK_INSTALL_DIR=$HOME/zephyr-sdk" >> $GITHUB_ENV
+
       - name: Init west
         run: west init -l config
 
