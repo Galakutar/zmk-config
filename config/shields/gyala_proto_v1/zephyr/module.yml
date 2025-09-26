@@ -1,0 +1,3 @@
+name: gyala_proto_v1
+build:
+  cmake: .
