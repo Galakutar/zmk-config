@@ -7,7 +7,5 @@ manifest:
       remote: zmkfirmware
       revision: main
       path: zmk
-    - name: gyala_proto_v1
-      path: config/shields/gyala_proto_v1
   self:
     path: config
