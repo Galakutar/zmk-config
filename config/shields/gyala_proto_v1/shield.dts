@@ -1,0 +1,5 @@
+#include "seeeduino_xiao_ble.dtsi"
+
+/ {
+    compatible = "zmk,keyboard";
+};

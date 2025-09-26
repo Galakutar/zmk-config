@@ -1,0 +1,3 @@
+config SHIELD_GYALA_PROTO_V1
+    bool "Gyala Proto V1"
+    depends on SHIELD_SEEEDUINO_XIAO_BLE
