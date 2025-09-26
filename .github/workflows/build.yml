@@ -1,0 +1,51 @@
+name: Build ZMK firmware
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          submodules: recursive
+
+      - name: Install dependencies
+        run: |
+          sudo apt update
+          sudo apt install -y python3-pip ninja-build cmake gperf ccache dfu-util wget \
+            device-tree-compiler libffi-dev git make gcc g++ unzip
+          pip3 install west
+
+      - name: Clean conflicting app directory
+        run: rm -rf app
+
+      - name: Init west
+        run: west init -l config
+
+      - name: Remove conflicting west.yml
+        run: rm -f zmk/app/west.yml || true
+
+      - name: Manually clone ZMK
+        run: git clone --depth=1 https://github.com/zmkfirmware/zmk.git zmk
+
+      - name: Update west
+        run: west update
+
+      - name: Check for west-commands.yml
+        run: ls zmk/west-commands.yml
+
+      - name: Build firmware
+        run: |
+          west build -s zmk/app -b seeeduino_xiao_ble -- -DSHIELD=gyala_proto_v1
+
+      - name: Upload firmware
+        uses: actions/upload-artifact@v4
+        with:
+          name: zmk.uf2
+          path: build/zephyr/zmk.uf2

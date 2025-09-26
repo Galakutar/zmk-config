@@ -1,0 +1,47 @@
+/ {
+    &i2c1 {
+        status = "okay";
+
+        mcp0: mcp23018@20 {
+            compatible = "microchip,mcp23018";
+            reg = <0x20>;
+            gpio-controller;
+            #gpio-cells = <2>;
+        };
+    };
+
+    kscan0: kscan@20 {
+        compatible = "zmk,kscan-gpio-matrix";
+        label = "KS0";
+        row-gpios = <&mcp0 0 GPIO_ACTIVE_LOW>, <&mcp0 1 GPIO_ACTIVE_LOW>, <&mcp0 2 GPIO_ACTIVE_LOW>, <&mcp0 3 GPIO_ACTIVE_LOW>, <&mcp0 4 GPIO_ACTIVE_LOW>;
+        col-gpios = <&mcp0 8 GPIO_ACTIVE_LOW>, <&mcp0 9 GPIO_ACTIVE_LOW>, <&mcp0 10 GPIO_ACTIVE_LOW>, <&mcp0 11 GPIO_ACTIVE_LOW>, <&mcp0 12 GPIO_ACTIVE_LOW>, <&mcp0 13 GPIO_ACTIVE_LOW>, <&mcp0 14 GPIO_ACTIVE_LOW>, <&mcp0 15 GPIO_ACTIVE_LOW>;
+        debounce-period-ms = <5>;
+        scan-period-ms = <1>;
+    };
+
+    encoder0: encoder0 {
+        compatible = "zmk,behavior-encoder";
+        label = "ENC0";
+        a-gpios = <&gpio0 0 GPIO_ACTIVE_HIGH>;
+        b-gpios = <&gpio0 1 GPIO_ACTIVE_HIGH>;
+    };
+
+    encoder1: encoder1 {
+        compatible = "zmk,behavior-encoder";
+        label = "ENC1";
+        a-gpios = <&gpio0 3 GPIO_ACTIVE_HIGH>;
+        b-gpios = <&gpio0 4 GPIO_ACTIVE_HIGH>;
+    };
+
+    gpio_keys {
+        compatible = "gpio-keys";
+        encoder0_press: encoder0_press {
+            gpios = <&gpio0 2 GPIO_ACTIVE_LOW>;
+            label = "ENC0_PRESS";
+        };
+        encoder1_press: encoder1_press {
+            gpios = <&gpio0 5 GPIO_ACTIVE_LOW>;
+            label = "ENC1_PRESS";
+        };
+    };
+};
