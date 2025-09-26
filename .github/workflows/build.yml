@@ -34,6 +34,9 @@ jobs:
       - name: Update west
         run: west update
 
+      - name: Export Zephyr CMake package
+        run: west zephyr-export
+
       - name: Build firmware
         run: |
           west build --pristine -s zmk/app -b seeeduino_xiao_ble -- -DSHIELD=${{ github.event.inputs.shield }}
