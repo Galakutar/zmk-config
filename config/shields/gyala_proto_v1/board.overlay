@@ -1,0 +1,17 @@
+/ {
+    chosen {
+        zmk,keyboard = &key_matrix;
+    };
+
+    key_matrix: matrix {
+        compatible = "zmk,matrix";
+        rows = <1 2 3>;
+        cols = <4 5 6>;
+        row-gpios = <&gpio0 1 GPIO_ACTIVE_LOW>,
+                    <&gpio0 2 GPIO_ACTIVE_LOW>,
+                    <&gpio0 3 GPIO_ACTIVE_LOW>;
+        col-gpios = <&gpio0 4 GPIO_ACTIVE_LOW>,
+                    <&gpio0 5 GPIO_ACTIVE_LOW>,
+                    <&gpio0 6 GPIO_ACTIVE_LOW>;
+    };
+};
