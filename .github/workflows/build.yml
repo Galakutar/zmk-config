@@ -28,7 +28,7 @@ jobs:
 
       - name: Build firmware
         run: |
-          west build -s zmk/app -b seeeduino_xiao_ble -- -DSHIELD=${{ github.event.inputs.shield }}
+          west build --pristine -s zmk/app -b seeeduino_xiao_ble -- -DSHIELD=${{ github.event.inputs.shield }}
 
       - name: Upload firmware
         uses: actions/upload-artifact@v4
