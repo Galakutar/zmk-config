@@ -1,0 +1,9 @@
+/ {
+    compatible = "zmk,keyboard";
+
+    keymap {
+        compatible = "zmk,keymap";
+        // キー定義は後で追加
+    };
+};
+
